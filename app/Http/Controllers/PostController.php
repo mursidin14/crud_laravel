@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
@@ -12,7 +13,7 @@ class PostController extends Controller
 
     public function index()
     {
-        $posts = Post::latest()->paginate(5);
+        $posts = Post::latest()->filter()->simplePaginate(5);
 
         return view('posts.index', compact('posts'));
     }

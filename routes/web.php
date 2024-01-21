@@ -20,3 +20,5 @@ Route::get('/', function () {
 });
 
 Route::resource('/posts', PostController::class);
+
+// Route::get('/posts/search', [PostController::class, 'search'])->name('posts.search');

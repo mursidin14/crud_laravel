@@ -15,6 +15,16 @@
                 <div class="card border-0 shadow rounded">
                     <div class="card-body">
                         <a href="{{ route('posts.create') }}" class="btn btn-md btn-success mb-3">TAMBAH POSTS</a>
+                        <div class="d-flex justify-content-end">
+                            <div class="col-md-4 my-2">
+                                <form action="/posts" method="GET">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" name="search" placeholder="Search..." value="{{ request('search') }}">
+                                        <input type="submit" class="btn btn-sm btn-secondary" value="Search">
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
                         <table class="table table-bordered">
                             <thead>
                                 <th scope="col">GAMBAR</th>
@@ -43,13 +53,23 @@
                                         </td>
                                     </tr>
                                 @empty
-                                   <div class="alert alert-danger">
-                                      Data Post belum Tersedia.
-                                  </div>
+                                    @if(request('search'))
+                                        <tr>
+                                           <td colspan="4" class="text-lg-center font-italic font-light text-black-50">
+                                                Pencarian Data '{{ request('search') }}' tidak ada
+                                           </td> 
+                                        </tr>
+                                    @else
+                                        <tr>
+                                           <td colspan="4" class="text-lg-center font-italic font-light text-danger">
+                                                Post Data Belum Tersedia
+                                           </td> 
+                                        </tr>
+                                    @endif
                                 @endforelse
                             </tbody>
                         </table>
-                        {{ $posts->links() }}
+                            {{ $posts->links() }}
                     </div>
                 </div>
             </div>
